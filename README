@@ -1,0 +1,28 @@
+samplesink, simple sample data aggregator
+Copyright © 2008 William C. Benton
+
+samplesink is a simple generic class for maintaining
+aggregate information about a (potentially very large)
+collection of samples while using constant space.  It uses
+the technique described in "Updating mean and variance
+estimates: an improved method" by D.H.D. West, from CACM
+22(9); see http://doi.acm.org/10.1145/359146.359153
+
+It is released under the ASL 2.0 (see LICENSE).
+Documentation and unit tests will follow soon; for now,
+please see the example code provided in example.cc.
+
+samplesink is templated on three types:  SampleType,
+AggregateType, and CountType.  The first is the type of your
+samples, the second is the type you want to use for
+aggregates (mean, standard deviation), and the third is the
+type you want to use for counts.  The second defaults to
+double and the third to long.
+
+SampleType can be an arbitrary class if it provides the
+basic arithmetic, comparison, and assignment operators and
+you create a specialization for the meta::limits class (for
+extremes).  AggregateType can be an arbitrary class if you
+create a specialization for the support::math class (for a
+square-root implementation).  CountType can be an arbitrary
+class if it supports the increment operator.
